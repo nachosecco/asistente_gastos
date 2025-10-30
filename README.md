@@ -4,8 +4,7 @@
 
 ### ✨ Autor
 
-**Santiago Aguirre — Senior Machine Learning Engineer**
-[LinkedIn](https://www.linkedin.com/in/daniel-santiago-aguirre/)
+**Ignacio Secco — Senior QA & Release Engineer**
 Proyecto personal de automatización financiera con IA.
 Tecnologías: AWS Lambda · Docker · Python 3.13 · Terraform · Gemini API · Google Sheets · Telegram Bot API
 
