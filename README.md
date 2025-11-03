@@ -4,15 +4,38 @@
 
 ### ✨ Autor
 
-**Ignacio Secco — Senior QA & Release Engineer**
-Proyecto personal de automatización financiera con IA.
-Tecnologías: AWS Lambda · Docker · Python 3.13 · Terraform · Gemini API · Google Sheets · Telegram Bot API
+**Ignacio Secco — Senior QA & Release Engineer**  
+Proyecto personal de automatización financiera con IA.  
+Tecnologías: AWS Lambda · Docker · Python 3.13 · Gemini AI · Google Sheets · Telegram Bot API
 
 ---
+
+## 🚀 ¿Primera Vez Aquí?
+
+**👉 Lee primero: [`docs/COMIENZA_AQUI.md`](docs/COMIENZA_AQUI.md)**
+
+Encontrarás:
+- 📖 Guías de configuración paso a paso
+- ⚡ Inicio rápido (15 minutos)
+- 🔧 Guías de despliegue en AWS
+- 📚 Documentación técnica completa
+
+---
+
 ## 📘 Descripción General
 
-El **Asistente de Gastos** es una aplicación **serverless inteligente** desplegada sobre **AWS Lambda**, diseñada para registrar gastos personales desde **Telegram** y clasificarlos automáticamente con ayuda de **IA generativa (Gemini)**.  
+El **Asistente de Gastos** es una aplicación **serverless inteligente** desplegada sobre **AWS Lambda**, diseñada para registrar gastos personales desde **Telegram** y clasificarlos automáticamente con ayuda de **IA generativa (Gemini 2.0)**.  
 La información procesada se almacena directamente en **Google Sheets**, generando un control financiero simple, automatizado y escalable.
+
+### ✨ Características v3.0
+
+- 💱 **Multi-moneda:** Soporte para USD y UYU con detección automática
+- 🤖 **Categorización inteligente:** IA crea categorías específicas (sin "otros")
+- 👥 **Detección de usuarios:** Identifica gastos de Ignacio o Victoria
+- 💬 **Lenguaje natural:** Escribe como le hablarías a un amigo
+- 📊 **Auto-organizado:** Todo en Google Sheets automáticamente
+- ⚡ **Tiempo real:** Confirmación inmediata por Telegram
+- 💰 **Gratis:** $0/mes dentro de niveles gratuitos
 
 ---
 
@@ -296,22 +319,119 @@ Fecha: 2025-10-29
 usuario → mensaje → webhook → Lambda → Gemini → Sheets → respuesta al chat.
 
 
-## ✅ Estado Actual
+## ✅ Estado Actual - Version 3.0
 
-| Componente           | Estado | Observaciones                 |
-| -------------------- | ------ | ----------------------------- |
-| Docker Build         | ✅      | Arquitectura linux/amd64      |
-| ECR Upload           | ✅      | Versionado por tag            |
-| Lambda Handler       | ✅      | `src.app.main.lambda_handler` |
-| Variables de Entorno | ✅      | Cargadas desde `.env`         |
-| Gemini API           | ✅      | Autenticación correcta        |
-| Google Sheets        | 🟡     | Pendiente de validación       |
-| Telegram Bot         | ✅      | Responde vía webhook o curl   |
+| Componente           | Estado | Observaciones                          |
+| -------------------- | ------ | -------------------------------------- |
+| Docker Build         | ✅      | Arquitectura linux/amd64               |
+| ECR Upload           | ✅      | AWS Account 344666582324               |
+| Lambda Handler       | ✅      | `src.app.main.lambda_handler`          |
+| Variables de Entorno | ✅      | Configuradas en Lambda                 |
+| Gemini API           | ✅      | Gemini 2.0 Flash                       |
+| Google Sheets        | ✅      | 6 columnas (con Moneda)                |
+| Telegram Bot         | ✅      | Webhook activo                         |
+| Multi-Currency       | ✅      | USD y UYU                              |
+| Dynamic Categories   | ✅      | IA crea categorías específicas         |
+| User Detection       | ✅      | Ignacio y Victoria con aliases         |
+
+---
+
+## 📚 Documentación Completa
+
+Toda la documentación está organizada en el directorio [`docs/`](docs/):
+
+### 🚀 Guías de Inicio
+- **[`COMIENZA_AQUI.md`](docs/COMIENZA_AQUI.md)** - Punto de entrada principal
+- **[`QUICK_START.md`](docs/QUICK_START.md)** - Configuración en 15 minutos
+- **[`SETUP_GUIDE.md`](docs/SETUP_GUIDE.md)** - Guía completa paso a paso
+- **[`SETUP_FLOWCHART.md`](docs/SETUP_FLOWCHART.md)** - Guía visual con diagramas
+
+### 🔧 Despliegue y Configuración
+- **[`AWS_DEPLOYMENT_GUIDE.md`](docs/AWS_DEPLOYMENT_GUIDE.md)** - Despliegue en AWS Lambda
+- **[`DEPLOYMENT_COMPLETE.md`](docs/DEPLOYMENT_COMPLETE.md)** - Resumen de despliegue
+- **[`CREDENTIALS_CHECKLIST.md`](docs/CREDENTIALS_CHECKLIST.md)** - Lista de verificación
+
+### 📖 Documentación Técnica
+- **[`PROJECT_ANALYSIS.md`](docs/PROJECT_ANALYSIS.md)** - Análisis técnico completo
+- **[`SYSTEM_REVIEW_V1.md`](docs/SYSTEM_REVIEW_V1.md)** - Revisión del sistema
+- **[`CHANGELOG_V2.md`](docs/CHANGELOG_V2.md)** - Cambios de versión 2.0
+
+### 🧪 Testing y Desarrollo
+- **[`USER_DETECTION_TESTS.md`](docs/USER_DETECTION_TESTS.md)** - Tests de detección de usuarios
+- **[`V2_READY_TO_TEST.md`](docs/V2_READY_TO_TEST.md)** - Guía de testing v2.0
+
+### 📱 Referencias
+- **[`TELEGRAM_API_REFERENCE.md`](docs/TELEGRAM_API_REFERENCE.md)** - Referencia de API de Telegram
+
+---
+
+## 🚀 Inicio Rápido
+
+### Opción 1: Ya Está Desplegado (¡Úsalo Ya!)
+
+Si ya completaste la configuración:
+
+1. Abre Telegram
+2. Busca: **@gastos_secco_grignola_bot**
+3. Envía: "Gasté 1500 en taxi"
+4. ✅ ¡Listo! Revisa tu Google Sheet
+
+### Opción 2: Primera Configuración
+
+**👉 Sigue la guía:** [`docs/COMIENZA_AQUI.md`](docs/COMIENZA_AQUI.md)
+
+**Tiempo:** 20-30 minutos  
+**Costo:** $0 (todo gratis)  
+**Resultado:** Bot de Telegram funcionando con IA
+
+---
+
+## 🎯 Ejemplos de Uso
+
+### Gastos de Ignacio (default)
+```
+Tú: "Gasté 1500 en taxi"
+Bot: Registrado ✅
+     $ 1500.0 (UYU)
+     Categoría: transporte
+     Quién: Ignacio
+```
+
+### Gastos de Victoria
+```
+Tú: "Victoria gastó 2500 en peluquería"
+Bot: Registrado ✅
+     $ 2500.0 (UYU)
+     Categoría: belleza
+     Quién: Victoria
+
+Tú: "Vicky: 50 dólares en Amazon"
+Bot: Registrado ✅
+     U$S 50.0 (USD)
+     Categoría: tecnologia
+     Quién: Victoria
+```
+
+### Categorías Dinámicas
+```
+Tú: "Veterinario 3500"
+Bot: Registrado ✅
+     $ 3500.0 (UYU)
+     Categoría: mascotas  ← IA creó esta categoría!
+     Quién: Ignacio
+```
 
 ---
 
 ## 🚀 Próximos pasos
-3. Añadir un pipeline **CI/CD con GitHub Actions** para build + push + deploy automático.
-4. Implementar **monitoring y alerting** en CloudWatch.
+
+### Mejoras Futuras (v4.0)
+- Gastos compartidos (de la casa)
+- Presupuestos y alertas
+- Reportes mensuales automáticos
+- OCR de recibos
+- Dashboard web
+- CI/CD con GitHub Actions
+- Monitoring con CloudWatch
 
 
