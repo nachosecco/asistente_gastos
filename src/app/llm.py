@@ -24,7 +24,7 @@ ESQUEMA JSON OBLIGATORIO:
   "categoria": string,
   "descripcion": string,
   "fecha": "YYYY-MM-DD" | null,
-  "quien": string | null
+  "quien": "Ignacio" | "Victoria"
 }
 
 REGLAS DE PARSEO:
@@ -73,25 +73,24 @@ REGLAS DE PARSEO:
    - NO inventes fechas, si hay duda → null
 
 6. QUIÉN (Usuario que realizó el gasto):
-   - Usuarios conocidos: Victoria (alias: Vicky, Vicki, Viki), Ignacio (alias: Nacho, Igna, Nachito)
-   - Si el mensaje menciona explícitamente un usuario, extrae ese nombre:
+   - Solo hay 2 usuarios posibles: "Ignacio" o "Victoria"
+   - Si el mensaje menciona "Victoria", "Vicky", "Vicki" o "Viki" → "Victoria"
+   - Si NO menciona a Victoria → "Ignacio" (default)
+   - Busca patrones como:
      · "Victoria gastó X" → "Victoria"
      · "Vicky: X en Y" → "Victoria"
      · "Compré X, Vicky" → "Victoria"
      · "Ayer Vicki pagó X" → "Victoria"
      · "Para Victoria, X" → "Victoria"
-     · "Nacho gastó X" → "Ignacio"
-   - Normaliza alias a nombre completo siempre
-   - Si NO se menciona usuario explícitamente → null
-   - IMPORTANTE: Solo extrae si está mencionado claramente en el mensaje
+   - SIEMPRE devuelve "Ignacio" o "Victoria", nunca null ni otros nombres
 
 EJEMPLOS COMPLETOS:
 
 Usuario: "Pagué 50 dólares en Amazon"
-{"monto": 50.0, "moneda": "USD", "categoria": "tecnologia", "descripcion": "Amazon", "fecha": null, "quien": null}
+{"monto": 50.0, "moneda": "USD", "categoria": "tecnologia", "descripcion": "Amazon", "fecha": null, "quien": "Ignacio"}
 
 Usuario: "Llevé al perro al veterinario, 3500"
-{"monto": 3500.0, "moneda": "UYU", "categoria": "mascotas", "descripcion": "veterinario", "fecha": null, "quien": null}
+{"monto": 3500.0, "moneda": "UYU", "categoria": "mascotas", "descripcion": "veterinario", "fecha": null, "quien": "Ignacio"}
 
 Usuario: "Victoria gastó 2000 en mercado"
 {"monto": 2000.0, "moneda": "UYU", "categoria": "mercado", "descripcion": "mercado", "fecha": null, "quien": "Victoria"}
@@ -105,11 +104,11 @@ Usuario: "Corte de pelo 1200, Vicky"
 Usuario: "Ayer Vicki gastó 25 u$s en Netflix"
 {"monto": 25.0, "moneda": "USD", "categoria": "suscripciones", "descripcion": "Netflix", "fecha": "AYER", "quien": "Victoria"}
 
-Usuario: "Nacho compró flores 800"
-{"monto": 800.0, "moneda": "UYU", "categoria": "regalos", "descripcion": "flores", "fecha": null, "quien": "Ignacio"}
-
 Usuario: "Gasté 500 en café"
-{"monto": 500.0, "moneda": "UYU", "categoria": "comida", "descripcion": "café", "fecha": null, "quien": null}
+{"monto": 500.0, "moneda": "UYU", "categoria": "comida", "descripcion": "café", "fecha": null, "quien": "Ignacio"}
+
+Usuario: "Almuerzo 800"
+{"monto": 800.0, "moneda": "UYU", "categoria": "comida", "descripcion": "almuerzo", "fecha": null, "quien": "Ignacio"}
 
 NO incluyas comentarios, explicaciones ni texto fuera del JSON.
 """
