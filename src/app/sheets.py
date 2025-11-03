@@ -15,6 +15,42 @@ def get_google_credentials():
     creds_dict = json.loads(creds_json)
     return service_account.Credentials.from_service_account_info(creds_dict)
 
+def read_range(range_: str = "registros!A:F"):
+    """
+    Read data from Google Sheets (read-only access).
+    
+    Args:
+        range_: Sheet range to read (default: "registros!A:F")
+        
+    Returns:
+        List of rows, where each row is a list of values
+        
+    Example:
+        [
+            ["Fecha", "Monto", "Moneda", "Categoría", "Descripción", "Quién"],
+            ["2025-11-03", "1500", "UYU", "transporte", "taxi", "Ignacio"],
+            ...
+        ]
+    """
+    try:
+        creds = get_google_credentials()
+        service = build("sheets", "v4", credentials=creds)
+        
+        SHEET_ID = os.getenv("GOOGLE_SHEET_ID")
+        resp = service.spreadsheets().values().get(
+            spreadsheetId=SHEET_ID,
+            range=range_
+        ).execute()
+        
+        return resp.get("values", [])
+        
+    except Exception as e:
+        import logging
+        logger = logging.getLogger()
+        logger.error(f"Error reading from Google Sheets: {str(e)}")
+        raise
+
+
 def append_gasto(gasto):
     """
     Appends expense to Google Sheet.
