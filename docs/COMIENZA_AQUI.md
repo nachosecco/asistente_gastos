@@ -253,7 +253,7 @@ Asistente_gastos/
 │       └── sheets.py   - Escritor de Google Sheets
 │
 ├── 🏗️ Infraestructura
-│   └── infraestructure/
+│   └── infra/
 │       └── modules/    - Configs de Terraform
 │
 └── 🐳 Despliegue
@@ -303,4 +303,5 @@ Una vez que lo tengas funcionando:
 *¿Preguntas? ¿Problemas? Revisa las secciones de resolución de problemas en cada guía.*
 
 **¡Construyamos algo genial! 🔥**
+
 

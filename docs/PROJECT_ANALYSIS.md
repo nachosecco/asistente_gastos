@@ -202,9 +202,9 @@ Eres un extractor de información. Devuelves SOLO JSON válido, sin texto adicio
    - `TZ = ZoneInfo("America/Bogota")`
    - **Fix:** Make configurable via environment variable
 
-6. **Typo in Infrastructure Path**
-   - `infraestructure/prod/lamda/` should be `lambda`
-   - **Fix:** Rename directory
+6. **Infrastructure Path Improvements**
+   - ✅ Renamed to `infra/` for consistency
+   - ✅ Fixed typo: `lamda/` → `lambda/`
 
 7. **Unused Dependencies**
    - FastAPI and Uvicorn included but not used
@@ -440,7 +440,7 @@ USER2_NAME=User2
 ### Short-term (This Week)
 5. ⚠️ **Add type hints** throughout codebase
 6. ⚠️ **Create .env.example** file
-7. ⚠️ **Fix typo** in infrastructure path (`lamda` → `lambda`)
+7. ⚠️ **Add type hints** throughout codebase
 8. ⚠️ **Add input validation** to Lambda handler
 9. ⚠️ **Implement basic tests** (at least unit tests)
 

@@ -191,7 +191,7 @@ Asistente_gastos/
 │       ├── llm.py
 │       └── sheets.py
 │
-├── infraestructure/          ← Terraform
+├── infra/                    ← Terraform
 │   └── modules/
 │
 └── scripts/                  ← Ready for future scripts
@@ -320,5 +320,6 @@ git merge new-feature-name
 
 **Built with ❤️ by Ignacio Secco**  
 **Powered by:** Gemini AI, AWS Lambda, Google Sheets, Telegram
+
 
 

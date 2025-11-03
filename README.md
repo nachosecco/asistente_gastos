@@ -69,7 +69,7 @@ asistente_gastos/
 │   │   ├── llm.py           # Integración con Gemini (IA)
 │   │   └── sheets.py        # Conexión a Google Sheets
 │   └── __init__.py
-├── infraestructure/
+├── infra/
 │   ├── modules/
 │   │   └── lambda_function/ # Módulo Terraform base
 │   └── prod/

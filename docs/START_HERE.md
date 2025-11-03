@@ -253,7 +253,7 @@ Asistente_gastos/
 │       └── sheets.py   - Google Sheets writer
 │
 ├── 🏗️ Infrastructure
-│   └── infraestructure/
+│   └── infra/
 │       └── modules/    - Terraform configs
 │
 └── 🐳 Deployment
