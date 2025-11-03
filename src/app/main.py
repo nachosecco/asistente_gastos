@@ -14,6 +14,12 @@ logger.setLevel(logging.INFO)
 
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "NOT_SET")
 
+# User mapping: chat_id → default user name
+USER_MAPPING = {
+    807197442: "Ignacio",  # @bigotesecco
+    641045556: "User1",    # Update with actual name if known
+}
+
 def lambda_handler(event, context):
     """
     Handler principal invocado por AWS Lambda.
@@ -46,10 +52,20 @@ def lambda_handler(event, context):
             gasto["fecha"] = date.today().isoformat()
             logger.info(f"Fecha agregada automáticamente: {gasto['fecha']}")
 
-        if chat_id == 641045556:
-            gasto["quien"] = "User1"
+        # 3.5️⃣ Determinar quién gastó
+        # Get default user based on who sent the message
+        default_user = USER_MAPPING.get(chat_id, f"User_{chat_id}")
+        
+        # Check if AI detected a specific user mentioned in the message
+        quien_detectado = gasto.get("quien")
+        if quien_detectado:
+            # User was explicitly mentioned in message (e.g., "Victoria gastó X")
+            gasto["quien"] = quien_detectado
+            logger.info(f"Usuario detectado en mensaje: {quien_detectado}")
         else:
-            gasto["quien"] = "User2"
+            # No user mentioned, use the sender's name
+            gasto["quien"] = default_user
+            logger.info(f"Usuario por defecto (remitente): {default_user}")
 
         # 4️⃣ Guardar en Google Sheets
         logger.info("Invocando append_gasto()...")
