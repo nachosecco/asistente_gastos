@@ -57,20 +57,30 @@ def lambda_handler(event, context):
         logger.info("✅ Gasto registrado en Google Sheets")
 
         # 5️⃣ Responder en Telegram
+        moneda = gasto.get('moneda', 'UYU')
+        
+        # Currency symbol mapping
+        if moneda == 'USD':
+            moneda_symbol = 'U$S'
+        elif moneda == 'UYU':
+            moneda_symbol = '$'
+        else:
+            moneda_symbol = moneda  # Fallback
+        
         reply = (
             f"Registrado ✅\n"
-            f"{gasto['monto']} COP\n"
+            f"{moneda_symbol} {gasto['monto']} ({moneda})\n"
             f"Categoría: {gasto['categoria']}\n"
             f"Descripción: {gasto['descripcion']}\n"
             f"Fecha: {gasto['fecha']}\n"
             f"Quién: {gasto['quien']}"
         )
         logger.info("Enviando respuesta a Telegram...")
-        requests.post(
+        telegram_response = requests.post(
             f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
             json={"chat_id": chat_id, "text": reply},
         )
-        logger.info("✅ Mensaje enviado a Telegram")
+        logger.info(f"✅ Mensaje enviado a Telegram (status: {telegram_response.status_code})")
 
         return {"statusCode": 200, "body": "ok"}
 
